@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 – 日常查询·场景对照·延伸阅读</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; background-color: #f5f7fb; color: #2c3e50; line-height: 1.7; }
+        a { color: #e63946; text-decoration: none; border-bottom: 1px dotted #e63946; transition: color 0.25s, border-color 0.25s; }
+        a:hover { color: #9b2226; border-bottom: 1px solid #9b2226; }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(150deg, #0b1a2e 0%, #1a2f45 100%);
+            padding: 3.8rem 1.5rem 4rem;
+            text-align: center;
+            color: #eaeef5;
+            border-bottom: 3px solid #e6394633;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0.8rem auto 0;
+            opacity: 0.88;
+            font-weight: 300;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: #e6394633;
+            padding: 0.1rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-top: 1.2rem;
+            color: #fbc4b3;
+            border: 1px solid #e6394655;
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.2rem 1.5rem 4rem;
+        }
+
+        /* 导航模拟（顶部浅色条） */
+        .top-nav {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dce3ed;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.02);
+        }
+        .top-nav .brand {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: #1f3a4b;
+            letter-spacing: 1px;
+        }
+        .top-nav .brand span { color: #e63946; }
+        .top-nav .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            font-size: 0.9rem;
+        }
+        .top-nav .nav-links a {
+            color: #2c3e50;
+            border-bottom: none;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        .top-nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 0%; height: 2px;
+            background: #e63946;
+            transition: width 0.3s;
+        }
+        .top-nav .nav-links a:hover::after { width: 100%; }
+        .top-nav .nav-links a:hover { color: #9b2226; }
+
+        /* 核心介绍卡片 */
+        .intro-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+            margin: 1.8rem 0 2.8rem;
+            border: 1px solid #eef2f7;
+        }
+        .intro-card h2 {
+            font-size: 1.6rem;
+            font-weight: 450;
+            margin-bottom: 1rem;
+            color: #1f3a4b;
+            border-left: 4px solid #e63946;
+            padding-left: 1rem;
+        }
+        .intro-card p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+        .intro-card p:last-child { margin-bottom: 0; }
+
+        /* 三个场景模块 — 轻卡片 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.8rem;
+        }
+        .scene-item {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #e2e9f2;
+            transition: all 0.2s;
+        }
+        .scene-item:hover {
+            border-color: #e6394650;
+            box-shadow: 0 8px 18px rgba(230,57,70,0.06);
+        }
+        .scene-item .icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+        }
+        .scene-item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #1f3a4b;
+        }
+        .scene-item p {
+            font-size: 0.95rem;
+            color: #3e566b;
+        }
+        .scene-item .extra-note {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            background: #f0f4fb;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #4b6a85;
+        }
+
+        /* 常见说明 / FAQ 摘要 */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2rem 1.8rem;
+            margin: 2.5rem 0 2rem;
+            border: 1px solid #e2e9f2;
+        }
+        .faq-summary h3 {
+            font-size: 1.3rem;
+            font-weight: 450;
+            margin-bottom: 1rem;
+            color: #1f3a4b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .faq-summary details {
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #edf2f8;
+            padding-bottom: 0.6rem;
+        }
+        .faq-summary details:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .faq-summary summary {
+            cursor: pointer;
+            font-weight: 450;
+            color: #2c3e50;
+            padding: 0.3rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .faq-summary summary::before {
+            content: "▸";
+            margin-right: 0.6rem;
+            color: #e63946;
+            transition: transform 0.2s;
+        }
+        .faq-summary details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .faq-summary .faq-answer {
+            padding: 0.4rem 0 0.4rem 1.8rem;
+            font-size: 0.95rem;
+            color: #3e566b;
+        }
+
+        /* 页脚 */
+        .site-footer {
+            border-top: 1px solid #dce3ed;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6a7f98;
+            background: #f0f4fa;
+            margin-top: 1.5rem;
+        }
+        .site-footer a {
+            color: #2c3e50;
+            border-bottom: none;
+        }
+        .site-footer a:hover { color: #e63946; }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .top-nav { flex-direction: column; gap: 0.4rem; }
+            .top-nav .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .intro-card { padding: 1.5rem; }
+            .faq-summary { padding: 1.5rem; }
+            .container { padding: 1.5rem 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航（浅色粘性） -->
+<div class="top-nav">
+    <div class="brand"><span>✦</span> 爱游·日常</div>
+    <div class="nav-links">
+        <a href="#intro">介绍</a>
+        <a href="#scenes">场景</a>
+        <a href="#faq">说明</a>
+        <a href="https://mobile-tv-igame.com" style="color:#e63946;">爱游戏</a>
+    </div>
+</div>
+
+<!-- 深色头图 hero -->
+<header class="hero">
+    <h1>日常查询 · 对照 · 延伸</h1>
+    <p>从手机到电视，从快速检索到偶尔翻阅——<br>一个偏向生活节奏的内容参考页，帮你找到合适的信息落点。</p>
+    <span class="tagline">轻量导航 · 三个场景 · 常见说明</span>
+</header>
+
+<!-- 正文容器 -->
+<main class="container">
+
+    <!-- 核心介绍 -->
+    <section class="intro-card" id="intro">
+        <h2>关于这个页面</h2>
+        <p>很多时候我们只是想确认一条信息，或者随手对照某个功能描述，并不需要进入冗长的操作流程。这个介绍页围绕“日常查询、对照和延伸阅读”展开，把零散的需求归纳成几个自然段落。</p>
+        <p>如果你正好在使用 <a href="https://mobile-tv-igame.com">爱游戏</a> 相关的服务，或者只是想了解移动端与电视端的一些基本对照，下面的模块可能恰好在你的阅读范围里。每个场景都留了一点延伸的线索，方便你按自己的节奏往下走。</p>
+        <p>页面内容保持克制，不堆砌术语，也不做超出实际的功能描述。好的参考页就像一本随手翻开的笔记本——有结构，但不僵硬。</p>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <h2 style="font-weight:450; font-size:1.4rem; margin-bottom:0.2rem; color:#1f3a4b;" id="scenes">日常中会遇到的几个场景</h2>
+    <div class="scenes-grid">
+        <article class="scene-item">
+            <div class="icon">📱</div>
+            <h3>手机端快速对照</h3>
+            <p>在手机上打开某个功能后，想确认电视端对应的入口或名称是否一致。不用来回切换，这里列出了一些常见的命名差异和位置习惯。</p>
+            <span class="extra-note">适合随手翻阅</span>
+        </article>
+        <article class="scene-item">
+            <div class="icon">📺</div>
+            <h3>电视端延伸阅读</h3>
+            <p>有些设置或分类在电视屏幕上显示得更简洁，但背后的逻辑和手机端相通。这里提供一些简短的背景说明，帮助理解界面设计意图。</p>
+            <span class="extra-note">不打扰主操作</span>
+        </article>
+        <article class="scene-item">
+            <div class="icon">🔍</div>
+            <h3>临时查询·对照</h3>
+            <p>比如忘记某个板块的分类顺序，或者想了解某项功能是否同时支持移动和电视。把常见的对照点整理成短条目，节省重复搜索的时间。</p>
+            <span class="extra-note">日常备忘录</span>
+        </article>
+    </div>
+
+    <!-- 常见说明 / FAQ 摘要 -->
+    <section class="faq-summary" id="faq">
+        <h3>❓ 常见说明 · 简摘</h3>
+
+        <details>
+            <summary>页面内容会频繁更新吗？</summary>
+            <div class="faq-answer">本页定位为轻量导航式介绍，主要保持基础内容的稳定性。如有必要，会小幅度调整对照点或场景描述，但不会每天变动。</div>
+        </details>
+        <details>
+            <summary>我可以用手机和电视同时参考吗？</summary>
+            <div class="faq-answer">当然可以。页面采用响应式设计，手机和电视浏览器都能正常显示。三个场景模块就是围绕这种双端对照习惯来组织的。</div>
+        </details>
+        <details>
+            <summary>提到的“延伸阅读”具体指什么？</summary>
+            <div class="faq-answer">指那些不直接影响操作，但能帮助你理解功能背景的短说明。比如某些分类为什么这样命名，或者移动端与电视端的逻辑差异。避免过度解释，只挑最相关的。</div>
+        </details>
+        <details>
+            <summary>和主站 <a href="https://mobile-tv-igame.com">爱游戏</a> 是什么关系？</summary>
+            <div class="faq-answer">这个页面是独立的一个介绍/导航页，内容围绕日常查询和场景展开，方便快速浏览。主站提供更完整的服务与功能，本页可作为进入主站前的一个参考入口。</div>
+        </details>
+    </section>
+
+    <!-- 一句自然的段落，包含链接 -->
+    <p style="margin: 1.8rem 0 0.5rem; font-size: 0.95rem; border-left: 2px solid #e6394633; padding-left: 1rem; color: #34526b;">
+        如果你希望进一步探索完整的功能列表或账户管理，可以前往 <a href="https://mobile-tv-igame.com">爱游戏</a> 查看详细内容。日常使用中遇到拿不准的对照点，随时回来翻翻这几个场景。
+    </p>
+
+</main>
+
+<!-- 页脚 -->
+<footer class="site-footer">
+    <p>内容页面 · 基于日常查询和对照组织 · 无诱导性描述</p>
+    <p style="margin-top:0.3rem;">
+        <a href="https://mobile-tv-igame.com">爱游戏</a>  —  保持简洁，保持可读
+    </p>
+</footer>
+
+</body>
+</html>
